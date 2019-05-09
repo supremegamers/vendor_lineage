@@ -13,6 +13,12 @@ on init
     chmod 0664 /dev/bfqio/rt-display/tasks
     chmod 0220 /dev/bfqio/rt-display/cgroup.event_control
 
+on post-fs-data
+
+    # Smart charging
+    chown system system /sys/class/power_supply/battery/battery_charging_enabled
+    chown system system /sys/class/power_supply/battery/charging_enabled
+
 on boot
     restorecon --recursive /sys/block/mmcblk0/queue
     chown system system /sys/block/mmcblk0/queue/scheduler
