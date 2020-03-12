@@ -2,6 +2,9 @@
 $(call inherit-product-if-exists, vendor/extra/product.mk)
 $(call inherit-product-if-exists, vendor/prebuilts/config.mk)
 
+# Bootanimation
+include vendor/kasumi/config/bootanimation.mk
+
 PRODUCT_BRAND ?= Kasumi
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
