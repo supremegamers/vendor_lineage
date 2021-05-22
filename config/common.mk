@@ -75,8 +75,8 @@ PRODUCT_COPY_FILES += \
     vendor/lineage/config/permissions/org.lineageos.android.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/org.lineageos.android.xml
 
 # Enforce privapp-permissions whitelist
-#~ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-#~     ro.control_privapp_permissions=enforce
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.control_privapp_permissions=log
 
 # Include AOSP audio files
 include vendor/lineage/config/aosp_audio.mk
