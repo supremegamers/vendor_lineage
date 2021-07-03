@@ -14,7 +14,7 @@
 
 $(call inherit-product, build/target/product/aosp_x86_64_ab.mk)
 
-include vendor/lineage/build/target/product/lineage_generic_target.mk
+include vendor/materium/build/target/product/lineage_generic_target.mk
 
 PRODUCT_NAME := lineage_x86_64_ab
 
