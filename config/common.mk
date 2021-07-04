@@ -108,7 +108,8 @@ PRODUCT_PACKAGES += \
 
 # AOSP packages
 PRODUCT_PACKAGES += \
-    Terminal
+    Terminal \
+    StitchImage
 
 # Lineage packages
 PRODUCT_PACKAGES += \
