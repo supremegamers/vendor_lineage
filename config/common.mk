@@ -190,6 +190,13 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/materium/overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/materium/overlay/common
 
+# Gboard side padding
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.com.google.ime.kb_pad_port_l=4 \
+    ro.com.google.ime.kb_pad_port_r=4 \
+    ro.com.google.ime.kb_pad_land_l=64 \
+    ro.com.google.ime.kb_pad_land_r=64
+
 PRODUCT_VERSION_MAJOR = 1
 PRODUCT_VERSION_MINOR = 0
 PRODUCT_VERSION_MAINTENANCE := 0
