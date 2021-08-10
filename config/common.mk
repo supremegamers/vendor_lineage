@@ -195,6 +195,17 @@ PRODUCT_VERSION_MINOR = 0
 PRODUCT_VERSION_MAINTENANCE := 0
 PRODUCT_VERSION_CODENAME = Pudding
 
+TARGET_BUILD_VARIANT_ID :=
+ifeq ($(STELLAR_BUILD_TYPE),gapps)
+ifeq ($(TARGET_GAPPS_ARCH),)
+$(warning TARGET_GAPPS_ARCH is not set, defaulting to arm64)
+TARGET_GAPPS_ARCH := arm64
+endif
+TARGET_BUILD_VARIANT_ID := -GApps
+$(call inherit-product, vendor/gapps/$(TARGET_GAPPS_ARCH)/$(TARGET_GAPPS_ARCH)-vendor.mk)
+DEVICE_PACKAGE_OVERLAYS += vendor/lineage/overlay/gapps
+endif
+
 ifeq ($(TARGET_VENDOR_SHOW_MAINTENANCE_VERSION),true)
     LINEAGE_VERSION_MAINTENANCE := $(PRODUCT_VERSION_MAINTENANCE)
 else
@@ -224,28 +235,35 @@ ifdef LINEAGE_BUILDTYPE
             # Remove leading dash from LINEAGE_EXTRAVERSION
             LINEAGE_EXTRAVERSION := $(shell echo $(LINEAGE_EXTRAVERSION) | sed 's/-//')
             # Add leading dash to LINEAGE_EXTRAVERSION
-            LINEAGE_EXTRAVERSION := -$(LINEAGE_EXTRAVERSION)
+            LINEAGE_EXTRAVERSION := -$(LINEAGE_EXTRAVERSION)$(TARGET_BUILD_VARIANT_ID)
+        else        
+            ifdef TARGET_BUILD_VARIANT_ID
+                LINEAGE_EXTRAVERSION := $(TARGET_BUILD_VARIANT_ID)
+            endif
         endif
     else
         ifndef LINEAGE_EXTRAVERSION
             # Force build type to EXPERIMENTAL, SNAPSHOT mandates a tag
             LINEAGE_BUILDTYPE := EXPERIMENTAL
+            ifdef TARGET_BUILD_VARIANT_ID
+                LINEAGE_EXTRAVERSION := $(TARGET_BUILD_VARIANT_ID)
+            endif
         else
             # Remove leading dash from LINEAGE_EXTRAVERSION
             LINEAGE_EXTRAVERSION := $(shell echo $(LINEAGE_EXTRAVERSION) | sed 's/-//')
             # Add leading dash to LINEAGE_EXTRAVERSION
-            LINEAGE_EXTRAVERSION := -$(LINEAGE_EXTRAVERSION)
+            LINEAGE_EXTRAVERSION := -$(LINEAGE_EXTRAVERSION)$(TARGET_BUILD_VARIANT_ID)
         endif
     endif
 else
     # If LINEAGE_BUILDTYPE is not defined, set to UNOFFICIAL
     LINEAGE_BUILDTYPE := UNOFFICIAL
-    LINEAGE_EXTRAVERSION :=
+    LINEAGE_EXTRAVERSION := $(TARGET_BUILD_VARIANT_ID)
 endif
 
 ifeq ($(LINEAGE_BUILDTYPE), UNOFFICIAL)
     ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        LINEAGE_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
+        LINEAGE_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)$(TARGET_BUILD_VARIANT_ID)
     endif
 endif
 
