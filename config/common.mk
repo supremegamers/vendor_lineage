@@ -213,7 +213,6 @@ else
 endif
 
 # Set LINEAGE_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
-
 ifndef LINEAGE_BUILDTYPE
     ifdef RELEASE_TYPE
         # Starting with "LINEAGE_" is optional
@@ -239,6 +238,11 @@ ifdef LINEAGE_BUILDTYPE
         else        
             ifdef TARGET_BUILD_VARIANT_ID
                 LINEAGE_EXTRAVERSION := $(TARGET_BUILD_VARIANT_ID)
+            endif
+        endif
+        ifneq ($(filter OFFICIAL RELEASE,$(LINEAGE_BUILDTYPE)),)
+            ifeq (,$(wildcard ./vendor/priv/releasekey.pk8))
+                $(error Build type is offical, yet vendor/priv does not exist)
             endif
         endif
     else
