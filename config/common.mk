@@ -203,7 +203,7 @@ TARGET_GAPPS_ARCH := arm64
 endif
 TARGET_BUILD_VARIANT_ID := -GApps
 $(call inherit-product, vendor/gapps/$(TARGET_GAPPS_ARCH)/$(TARGET_GAPPS_ARCH)-vendor.mk)
-DEVICE_PACKAGE_OVERLAYS += vendor/lineage/overlay/gapps
+PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/Stellar-Devices/OTA/stellar-S1/gapps/{device}.json
 endif
 
 ifeq ($(TARGET_VENDOR_SHOW_MAINTENANCE_VERSION),true)

@@ -1,3 +1,0 @@
-<resources>
-	<string name="updater_server_url" translatable="false">https://raw.github.com/Stellar-Devices/OTA/stellar-S1/gapps/{device}.json</string>
-</resources>
