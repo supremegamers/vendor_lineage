@@ -218,16 +218,24 @@ include vendor/sakura-priv/keys.mk
 endif
 
 #build type
-ifeq ($(SAKURA_BUILD_TYPE), coregapps)
-    $(call inherit-product, vendor/gapps/core/config.mk)
-    SAKURA_BUILD_ZIP_TYPE := GAPPS-Core
-else ifeq ($(SAKURA_BUILD_TYPE), basicgapps)
-    $(call inherit-product, vendor/gapps/basic/config.mk)
-    SAKURA_BUILD_ZIP_TYPE := GAPPS-Basic
+ifeq ($(SAKURA_BUILD_TYPE), opengapps)
+    GAPPS_VARIANT := pico
+    GAPPS_EXCLUDED_PACKAGES := ActionsServices \
+                            SetupWizard
+    $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+    $(call inherit-product-if-exists,$(if $(wildcard vendor/google/products/gms.mk),vendor/google/products/gms.mk,vendor/gapps/common/common-vendor.mk))
+    SAKURA_BUILD_ZIP_TYPE := OpenGapps-$(GAPPS_VARIANT)
+else ifeq ($(SAKURA_BUILD_TYPE), foss)
+    USE_FOSS_APPS := true
+    SAKURA_BUILD_ZIP_TYPE := FOSS
+    # foss apps
+    $(call inherit-product-if-exists, vendor/foss/foss.mk)
 else ifeq ($(SAKURA_BUILD_TYPE), microg)
     $(call inherit-product, prebuilts/prebuiltapks/microg.mk)
     SAKURA_BUILD_ZIP_TYPE := MICROG
 endif
+
+
 
 #OPLauncher
 #ifeq ($(SAKURA_OPLAUNCHER), true)
