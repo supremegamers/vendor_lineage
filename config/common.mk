@@ -122,10 +122,10 @@ PRODUCT_PACKAGES += \
     LineageSetupWizard \
     Updater
 
-# Stellar packages
+# Materium packages
 PRODUCT_PACKAGES += \
      OmniJaws \
-		 GamingMode \
+     GamingMode \
      SoftAPManager
 
 
@@ -208,21 +208,24 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.google.ime.kb_pad_land_l=64 \
     ro.com.google.ime.kb_pad_land_r=64
 
-PRODUCT_VERSION_MAJOR = 1
-PRODUCT_VERSION_MINOR = 0
+PRODUCT_VERSION_MAJOR := 1
+PRODUCT_VERSION_MINOR := 0
 PRODUCT_VERSION_MAINTENANCE := 0
-PRODUCT_VERSION_CODENAME = Pudding
+PRODUCT_VERSION_CODENAME := Pudding
+PRODUCT_MATERIUM_EXTRAVERSION := -BETA
 
-TARGET_BUILD_VARIANT_ID :=
-ifeq ($(STELLAR_BUILD_TYPE),gapps)
+PRODUCT_MATERIUM_VARIANT :=
+ifeq ($(MATERIUM_BUILD_TYPE),gapps)
 ifeq ($(TARGET_GAPPS_ARCH),)
 $(warning TARGET_GAPPS_ARCH is not set, defaulting to arm64)
 TARGET_GAPPS_ARCH := arm64
 endif
-TARGET_BUILD_VARIANT_ID := -GApps
+PRODUCT_MATERIUM_VARIANT := -GApps
 $(call inherit-product, vendor/gapps/$(TARGET_GAPPS_ARCH)/$(TARGET_GAPPS_ARCH)-vendor.mk)
-PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/Stellar-Devices/OTA/stellar-S1/gapps/{device}.json
+PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectMaterium/android_materium_ota/materium-v1/gapps/{device}.json
 endif
+
+TARGET_BUILD_VARIANT_ID := $(PRODUCT_MATERIUM_VARIANT)$(PRODUCT_MATERIUM_EXTRAVERSION)
 
 ifeq ($(TARGET_VENDOR_SHOW_MAINTENANCE_VERSION),true)
     LINEAGE_VERSION_MAINTENANCE := $(PRODUCT_VERSION_MAINTENANCE)
