@@ -2,4 +2,4 @@
 PRODUCT_TYPE := go
 
 # Inherit full common Lineage stuff
-$(call inherit-product, vendor/materium/config/common_full_phone.mk)
+$(call inherit-product, vendor/kasumi/config/common_full_phone.mk)

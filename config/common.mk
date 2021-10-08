@@ -1,7 +1,8 @@
 # Allow vendor/extra to override any property by setting it first
 $(call inherit-product-if-exists, vendor/extra/product.mk)
+$(call inherit-product-if-exists, vendor/prebuilts/config.mk)
 
-PRODUCT_BRAND ?= Materium
+PRODUCT_BRAND ?= Kasumi
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -26,15 +27,15 @@ endif
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/materium/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/materium/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/materium/prebuilt/common/bin/50-lineage.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-lineage.sh
+    vendor/kasumi/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/kasumi/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/kasumi/prebuilt/common/bin/50-lineage.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-lineage.sh
 
 ifneq ($(strip $(AB_OTA_PARTITIONS) $(AB_OTA_POSTINSTALL_CONFIG)),)
 PRODUCT_COPY_FILES += \
-    vendor/materium/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
-    vendor/materium/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
-    vendor/materium/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
+    vendor/kasumi/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
+    vendor/kasumi/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
+    vendor/kasumi/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.ota.allow_downgrade=true
@@ -43,19 +44,19 @@ endif
 
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/materium/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
+    vendor/kasumi/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
 # Lineage-specific broadcast actions whitelist
 PRODUCT_COPY_FILES += \
-    vendor/materium/config/permissions/lineage-sysconfig.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/lineage-sysconfig.xml
+    vendor/kasumi/config/permissions/lineage-sysconfig.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/lineage-sysconfig.xml
 
 # Copy all Lineage-specific init rc files
-$(foreach f,$(wildcard vendor/materium/prebuilt/common/etc/init/*.rc),\
+$(foreach f,$(wildcard vendor/kasumi/prebuilt/common/etc/init/*.rc),\
 	$(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
 
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
-    vendor/materium/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
+    vendor/kasumi/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -63,7 +64,7 @@ PRODUCT_COPY_FILES += \
 
 # Unlimited google photos backup
 PRODUCT_COPY_FILES += \
-    vendor/materium/prebuilt/google/etc/sysconfig/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml
+    vendor/kasumi/prebuilt/google/etc/sysconfig/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml
 
 # Enable wireless Xbox 360 controller support
 PRODUCT_COPY_FILES += \
@@ -71,26 +72,26 @@ PRODUCT_COPY_FILES += \
 
 # This is Lineage!
 PRODUCT_COPY_FILES += \
-    vendor/materium/config/permissions/org.lineageos.android.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/org.lineageos.android.xml
+    vendor/kasumi/config/permissions/org.lineageos.android.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/org.lineageos.android.xml
 
 # Enforce privapp-permissions whitelist
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.control_privapp_permissions=enforce
 
 # Include AOSP audio files
-include vendor/materium/config/aosp_audio.mk
+include vendor/kasumi/config/aosp_audio.mk
 
 # Include Lineage audio files
-include vendor/materium/config/lineage_audio.mk
+include vendor/kasumi/config/lineage_audio.mk
 
 ifneq ($(TARGET_DISABLE_LINEAGE_SDK), true)
 # Lineage SDK
-include vendor/materium/config/lineage_sdk_common.mk
+include vendor/kasumi/config/lineage_sdk_common.mk
 endif
 
 # TWRP
 ifeq ($(WITH_TWRP),true)
-include vendor/materium/config/twrp.mk
+include vendor/kasumi/config/twrp.mk
 endif
 
 # Do not include art debug targets
@@ -198,8 +199,8 @@ endif
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/materium/overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/materium/overlay/common
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/kasumi/overlay
+PRODUCT_PACKAGE_OVERLAYS += vendor/kasumi/overlay/common
 
 # Gboard side padding
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -211,21 +212,26 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_VERSION_MAJOR := 1
 PRODUCT_VERSION_MINOR := 0
 PRODUCT_VERSION_MAINTENANCE := 0
-PRODUCT_VERSION_CODENAME := Pudding
-PRODUCT_MATERIUM_EXTRAVERSION := -BETA
+PRODUCT_VERSION_CODENAME := PoPiPa
+PRODUCT_KASUMI_EXTRAVERSION := -FIRSTSTEPS
 
-PRODUCT_MATERIUM_VARIANT :=
-ifeq ($(MATERIUM_BUILD_TYPE),gapps)
+PRODUCT_KASUMI_VARIANT :=
+ifeq ($(KASUMI_BUILD_TYPE),gapps)
 ifeq ($(TARGET_GAPPS_ARCH),)
 $(warning TARGET_GAPPS_ARCH is not set, defaulting to arm64)
 TARGET_GAPPS_ARCH := arm64
 endif
-PRODUCT_MATERIUM_VARIANT := -GApps
+PRODUCT_KASUMI_VARIANT := -GApps
 $(call inherit-product, vendor/gapps/$(TARGET_GAPPS_ARCH)/$(TARGET_GAPPS_ARCH)-vendor.mk)
-PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectMaterium/android_materium_ota/materium-v1/gapps/{device}.json
+PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/android_vendor_kasumiota/kasumi-v1/gapps/{device}.json
 endif
 
-TARGET_BUILD_VARIANT_ID := $(PRODUCT_MATERIUM_VARIANT)$(PRODUCT_MATERIUM_EXTRAVERSION)
+ifeq ($(KASUMI_BUILD_TYPE),auroraoss)
+PRODUCT_KASUMI_VARIANT := -AuroraOSS
+PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/android_vendor_kasumiota/kasumi-v1/auroraoss/{device}.json
+endif
+
+TARGET_BUILD_VARIANT_ID := $(PRODUCT_KASUMI_EXTRAVERSION)$(PRODUCT_KASUMI_VARIANT)
 
 ifeq ($(TARGET_VENDOR_SHOW_MAINTENANCE_VERSION),true)
     LINEAGE_VERSION_MAINTENANCE := $(PRODUCT_VERSION_MAINTENANCE)
@@ -323,7 +329,7 @@ else
 endif
 
 PRODUCT_EXTRA_RECOVERY_KEYS += \
-    vendor/materium/build/target/product/security/lineage
+    vendor/kasumi/build/target/product/security/lineage
 
 -include vendor/materium-priv/keys/keys.mk
 
@@ -352,8 +358,16 @@ ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)
 endif
 endif
 
+ifeq ($(KASUMI_SHIP_LAWNCHAIR), true)
+    $(call inherit-product, vendor/lawnchair/lawnchair.mk)
+endif
+
+ifeq ($(KASUMI_SHIP_GSANS), true)
+    include vendor/kasumi/config/fonts.mk
+endif
+
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
--include vendor/materium/config/partner_gms.mk
+-include vendor/kasumi/config/partner_gms.mk
 
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
 ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)

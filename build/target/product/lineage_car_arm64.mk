@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include vendor/materium/build/target/product/lineage_generic_car_target.mk
+include vendor/kasumi/build/target/product/lineage_generic_car_target.mk
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_arm64.mk)
 

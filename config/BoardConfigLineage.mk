@@ -1,7 +1,7 @@
-include vendor/materium/config/BoardConfigKernel.mk
+include vendor/kasumi/config/BoardConfigKernel.mk
 
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-include vendor/materium/config/BoardConfigQcom.mk
+include vendor/kasumi/config/BoardConfigQcom.mk
 endif
 
-include vendor/materium/config/BoardConfigSoong.mk
+include vendor/kasumi/config/BoardConfigSoong.mk
