@@ -31,4 +31,4 @@ bandori: $(INTERNAL_OTA_PACKAGE_TARGET)
 	@echo "Package Complete: $(LINEAGE_TARGET_PACKAGE)" >&2
 	@echo "" >&2
 	@echo "To get started, get your custom recovery up and slap this ROM in!" >&2
-	@echo "Based on Project Materium, brought to you by Wind/owZ (@WindowZ414) feat. Yuki (@cyberyuki)."
+	@echo "Based on Project Materium, brought to you by Wind/owZ (@WindowZ414) feat. Yuki (@cyberyuki)." >&2
