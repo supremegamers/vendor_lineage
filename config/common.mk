@@ -84,6 +84,10 @@ include vendor/kasumi/config/aosp_audio.mk
 # Include Lineage audio files
 include vendor/kasumi/config/lineage_audio.mk
 
+# Change default notification sound
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.config.notification_sound=Bushido!.ogg
+
 ifneq ($(TARGET_DISABLE_LINEAGE_SDK), true)
 # Lineage SDK
 include vendor/kasumi/config/lineage_sdk_common.mk

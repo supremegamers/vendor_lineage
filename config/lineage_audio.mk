@@ -13,6 +13,7 @@ PRODUCT_COPY_FILES += \
 
 # Notifications
 PRODUCT_COPY_FILES += \
+    $(NOTIFICATION_PATH)/Bushido!.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/Bushido!.ogg \
     $(NOTIFICATION_PATH)/CyanDoink.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/CyanDoink.ogg \
     $(NOTIFICATION_PATH)/CyanMail.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/CyanMail.ogg \
     $(NOTIFICATION_PATH)/CyanMessage.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/CyanMessage.ogg \
