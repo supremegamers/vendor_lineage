@@ -366,10 +366,6 @@ ifeq ($(KASUMI_SHIP_LAWNCHAIR), true)
     $(call inherit-product, vendor/lawnchair/lawnchair.mk)
 endif
 
-ifeq ($(KASUMI_SHIP_GSANS), true)
-    include vendor/kasumi/config/fonts.mk
-endif
-
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/kasumi/config/partner_gms.mk
 
@@ -382,3 +378,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 endif
+
+# Fonts
+include vendor/kasumi/config/fonts.mk
