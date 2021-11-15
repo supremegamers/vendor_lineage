@@ -18,7 +18,6 @@ endif
 
 # Fonts
 PRODUCT_PACKAGES += \
-    fonts_customization.xml \
     LineageLatoFont \
     LineageRubikFont
 
