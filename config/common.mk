@@ -115,11 +115,6 @@ TARGET_SCREEN_HEIGHT ?= 1920
 PRODUCT_PACKAGES += \
     bootanimation.zip
 
-# AOSP packages
-PRODUCT_PACKAGES += \
-    Terminal \
-    StitchImage
-
 # Lineage packages
 PRODUCT_PACKAGES += \
     LineageParts \
@@ -157,7 +152,6 @@ PRODUCT_PACKAGES += \
     setcap \
     unrar \
     vim \
-    wget \
     zip
 
 # Filesystems tools
