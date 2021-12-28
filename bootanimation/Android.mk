@@ -24,22 +24,25 @@ $(TARGET_GENERATED_BOOTANIMATION): $(SOONG_ZIP)
 	$(hide) tar xfp vendor/kasumi/bootanimation/bootanimation.tar -C $(INTERMEDIATES)
 	$(hide) if [ $(TARGET_SCREEN_HEIGHT) -lt $(TARGET_SCREEN_WIDTH) ]; then \
 	    IMAGEWIDTH=$(TARGET_SCREEN_HEIGHT); \
+	    IMAGEHEIGHT=$(TARGET_SCREEN_WIDTH); \
 	else \
 	    IMAGEWIDTH=$(TARGET_SCREEN_WIDTH); \
+	    IMAGEHEIGHT=$(TARGET_SCREEN_HEIGHT); \
 	fi; \
 	IMAGESCALEWIDTH=$$IMAGEWIDTH; \
-	IMAGESCALEHEIGHT=$$(expr $$IMAGESCALEWIDTH / 3); \
+	IMAGESCALEHEIGHT=$$IMAGEHEIGHT; \
 	if [ "$(TARGET_BOOTANIMATION_HALF_RES)" = "true" ]; then \
 	    IMAGEWIDTH="$$(expr "$$IMAGEWIDTH" / 2)"; \
+	    IMAGEHEIGHT="$$(expr "$$IMAGEHEIGHT" / 2)"; \
 	fi; \
-	IMAGEHEIGHT=$$(expr $$IMAGEWIDTH / 3); \
 	RESOLUTION="$$IMAGEWIDTH"x"$$IMAGEHEIGHT"; \
-	for part_cnt in 0 1 2 3 4; do \
+	for part_cnt in 0; do \
 	    mkdir -p $(INTERMEDIATES)/part$$part_cnt; \
 	done; \
 	prebuilts/tools-lineage/${HOST_OS}-x86/bin/mogrify -resize $$RESOLUTION -colors 250 $(INTERMEDIATES)/*/*.png; \
-	echo "$$IMAGESCALEWIDTH $$IMAGESCALEHEIGHT 60" > $(INTERMEDIATES)/desc.txt; \
+	echo "$$IMAGESCALEWIDTH $$IMAGESCALEHEIGHT 1" > $(INTERMEDIATES)/desc.txt; \
 	cat vendor/kasumi/bootanimation/desc.txt >> $(INTERMEDIATES)/desc.txt
+	@echo "Res: $(IMAGEWIDTH) $(IMAGEHEIGHT)"
 	$(hide) $(SOONG_ZIP) -L 0 -o $(TARGET_GENERATED_BOOTANIMATION) -C $(INTERMEDIATES) -D $(INTERMEDIATES)
 
 ifeq ($(TARGET_BOOTANIMATION),)
