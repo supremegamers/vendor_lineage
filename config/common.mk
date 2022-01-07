@@ -363,6 +363,10 @@ endif
 ifeq ($(KASUMI_SHIP_LAWNCHAIR), true)
     $(call inherit-product, vendor/lawnchair/lawnchair.mk)
 endif
+ifeq ($(TARGET_NEEDS_LINEAGE_ISFP_PERM), true)
+PRODUCT_COPY_FILES += \
+    vendor/kasumi/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
+endif
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/kasumi/config/partner_gms.mk
