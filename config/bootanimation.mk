@@ -19,7 +19,7 @@ ifeq ($(TARGET_CUSTOM_BOOT_ANIMATION),)
          $(warning TARGET_BOOT_ANIMATION_RES is invalid or undefined, using generic bootanimation)
          TARGET_BOOT_ANIMATION_RES := 720
      endif
-     TARGET_CUSTOM_BOOT_ANIMATION := vendor/kasumi/common/media/bootanimation-$(TARGET_BOOT_ANIMATION_RES).zip
+     TARGET_CUSTOM_BOOT_ANIMATION := vendor/kasumi/prebuilt/common/media/bootanimation-$(TARGET_BOOT_ANIMATION_RES).zip
 endif
 
 PRODUCT_COPY_FILES += $(TARGET_CUSTOM_BOOT_ANIMATION):$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
