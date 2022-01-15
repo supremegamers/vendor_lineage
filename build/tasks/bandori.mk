@@ -38,7 +38,7 @@ bandori: $(INTERNAL_OTA_PACKAGE_TARGET) otatools target-files-package
 	@echo "Package Complete: $(LINEAGE_TARGET_PACKAGE)" >&2
 	@echo "" >&2
 	@echo "To get started, get your custom recovery up and slap this ROM in!" >&2
-	@echo "Based on Project Materium, brought to you by Beru Shinsetsu (@WindowZ414) feat. Yuki (@cyberyuki)." >&2
+	@echo "Based on Project Materium, brought to you by Yuki (@AITEx64) and Beru Shinsetsu (@WindowZ414)." >&2
 else
 # Builds that aren't marked as official aren't required to be signed.
 bandori: $(INTERNAL_OTA_PACKAGE_TARGET)
@@ -51,5 +51,5 @@ bandori: $(INTERNAL_OTA_PACKAGE_TARGET)
 	@echo "Package Complete: $(LINEAGE_TARGET_PACKAGE)" >&2
 	@echo "" >&2
 	@echo "To get started, get your custom recovery up and slap this ROM in!" >&2
-	@echo "Based on Project Materium, brought to you by Beru Shinsetsu (@WindowZ414) feat. Yuki (@cyberyuki)." >&2
+	@echo "Based on Project Materium, brought to you by Yuki (@AITEx64) and Beru Shinsetsu (@WindowZ414)." >&2
 endif
