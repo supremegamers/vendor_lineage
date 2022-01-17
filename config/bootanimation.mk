@@ -15,7 +15,7 @@
 
 # Bootanimation
 ifeq ($(TARGET_CUSTOM_BOOT_ANIMATION),)
-     ifeq ($(filter 480 720 1080,$(TARGET_BOOT_ANIMATION_RES)),)
+     ifeq ($(filter 480 720 1080 1440,$(TARGET_BOOT_ANIMATION_RES)),)
          $(warning TARGET_BOOT_ANIMATION_RES is invalid or undefined, using generic bootanimation)
          TARGET_BOOT_ANIMATION_RES := 720
      endif
