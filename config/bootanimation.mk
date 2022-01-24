@@ -19,6 +19,13 @@ ifeq ($(TARGET_CUSTOM_BOOT_ANIMATION),)
          $(warning TARGET_BOOT_ANIMATION_RES is invalid or undefined, using generic bootanimation)
          TARGET_BOOT_ANIMATION_RES := 720
      endif
+
+     # We don't know if the maintainer added space after definition in tree.
+     # (E.g. "TARGET_BOOT_ANIMATION_RES := 720 # Random thing)
+     # This causes COPY_FILES to malfunction, so delete everything after
+     # first space out. There shouldn't be a space before the actual value
+     # anyway, Rest In Pepperoni if there is. xD
+     TARGET_BOOT_ANIMATION_RES := $(shell echo $(TARGET_BOOT_ANIMATION_RES) | sed -e 's/ .*//')
      TARGET_CUSTOM_BOOT_ANIMATION := vendor/kasumi/prebuilt/common/media/bootanimation-$(TARGET_BOOT_ANIMATION_RES).zip
 endif
 
