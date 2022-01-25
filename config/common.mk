@@ -222,12 +222,15 @@ TARGET_GAPPS_ARCH := arm64
 endif
 PRODUCT_KASUMI_VARIANT := -GApps
 $(call inherit-product, vendor/gapps/$(TARGET_GAPPS_ARCH)/$(TARGET_GAPPS_ARCH)-vendor.mk)
-PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/kasumiota/kasumi-v1/gapps/{device}.json
 endif
 
 ifeq ($(KASUMI_BUILD_TYPE),auroraoss)
 PRODUCT_KASUMI_VARIANT := -AuroraOSS
-PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/kasumiota/kasumi-v1/aurora/{device}.json
+endif
+
+# Different if-else statement to simplify setting OTA URL
+ifneq ($(filter gapps auroraoss,$(KASUMI_BUILD_TYPE)),)
+PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/android_vendor_kasumiota/kasumi-v1/$(KASUMI_BUILD_TYPE)/{device}.json
 endif
 
 TARGET_BUILD_VARIANT_ID := $(PRODUCT_KASUMI_EXTRAVERSION)$(PRODUCT_KASUMI_VARIANT)
