@@ -16,7 +16,6 @@ Additional LineageOS functions:
 - cmka:            Cleans and builds using mka.
 - repodiff:        Diff 2 different branches or tags within the same repo
 - repolastsync:    Prints date and time of last repo sync.
-- reposync:        Parallel repo sync using ionice and SCHED_BATCH.
 - repopick:        Utility to fetch changes from Gerrit.
 - installboot:     Installs a boot.img to the connected device.
 - installrecovery: Installs a recovery.img to the connected device.
@@ -745,10 +744,6 @@ function repolastsync() {
     RLSLOCAL=$(date -d "$(stat -c %z $RLSPATH)" +"%e %b %Y, %T %Z")
     RLSUTC=$(date -d "$(stat -c %z $RLSPATH)" -u +"%e %b %Y, %T %Z")
     echo "Last repo sync: $RLSLOCAL / $RLSUTC"
-}
-
-function reposync() {
-    repo sync -j 4 "$@"
 }
 
 function repodiff() {
