@@ -121,10 +121,6 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 PRODUCT_PACKAGES += \
     bootanimation.zip
 
-# AOSP packages
-PRODUCT_PACKAGES += \
-    Terminal
-
 # Lineage packages
 PRODUCT_PACKAGES += \
     LineageParts \
@@ -154,7 +150,6 @@ PRODUCT_PACKAGES += \
     setcap \
     unrar \
     vim \
-    wget \
     zip
 
 # Filesystems tools

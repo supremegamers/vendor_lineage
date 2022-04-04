@@ -19,5 +19,12 @@ ifeq ($(filter 720 1080 1440,$(TARGET_BOOT_ANIMATION_RES)),)
      TARGET_BOOT_ANIMATION_RES := 720
 endif
 
+# We don't know if the maintainer added space after definition in tree.
+# (E.g. "TARGET_BOOT_ANIMATION_RES := 720 # Random thing)
+# This causes COPY_FILES to malfunction, so trim it. Everything after
+# pound sign is already filtered out by build system so nothing should
+# go wrong.
+TARGET_BOOT_ANIMATION_RES := $(strip $(TARGET_BOOT_ANIMATION_RES))
+
 PRODUCT_COPY_FILES += \
     vendor/lineage/prebuilt/common/bootanimation/bootanimation-$(TARGET_BOOT_ANIMATION_RES).zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
