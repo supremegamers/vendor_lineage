@@ -17,8 +17,6 @@ bootstrap_go_package {
     pluginFor: ["soong_build"],
 }
 
-lineage_generator {
-
 soong_config_module_type {
     name: "display_use_smooth_motion",
     module_type: "cc_defaults",
