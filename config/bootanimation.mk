@@ -15,6 +15,7 @@
 
 # Bootanimation
 ifeq ($(TARGET_CUSTOM_BOOT_ANIMATION),)
+     TARGET_BOOT_ANIMATION_RES ?= $(shell if [ $(TARGET_SCREEN_HEIGHT) -gt $(TARGET_SCREEN_WIDTH) ] ; then echo $(TARGET_SCREEN_WIDTH) ; else echo $(TARGET_SCREEN_HEIGHT) ; fi)
      ifeq ($(filter 480 720 1080 1440,$(TARGET_BOOT_ANIMATION_RES)),)
          $(warning TARGET_BOOT_ANIMATION_RES is invalid or undefined, using generic bootanimation)
          TARGET_BOOT_ANIMATION_RES := 720
