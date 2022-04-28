@@ -28,8 +28,8 @@ ifeq ($(LINEAGE_BUILDTYPE),OFFICIAL)
 bandori: $(INTERNAL_OTA_PACKAGE_TARGET) otatools target-files-package
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(LINEAGE_TARGET_PACKAGE)
 	$(hide) mv $(LINEAGE_TARGET_PACKAGE) $(LINEAGE_TARGET_PACKAGE).unsigned
-	$(hide) $(ANDROID_HOST_OUT)/bin/sign_target_files_apks -o -d vendor/priv $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $(PRODUCT_OUT)/signed-target_files.zip >&2
-	$(hide) $(ANDROID_HOST_OUT)/bin/ota_from_target_files -k vendor/priv/releasekey --block --backup=true $(PRODUCT_OUT)/signed-target_files.zip $(LINEAGE_TARGET_PACKAGE) >&2
+	$(hide) $(HOST_OUT)/bin/sign_target_files_apks -o -d vendor/priv $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip $(PRODUCT_OUT)/signed-target_files.zip >&2
+	$(hide) $(HOST_OUT)/bin/ota_from_target_files -k vendor/priv/releasekey --block --backup=true $(PRODUCT_OUT)/signed-target_files.zip $(LINEAGE_TARGET_PACKAGE) >&2
 	$(hide) $(MD5) $(LINEAGE_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(LINEAGE_TARGET_PACKAGE).md5sum
 	$(hide) $(SHA256) $(LINEAGE_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(LINEAGE_TARGET_PACKAGE).sha256sum
 	@echo "//          Project Kasumi          //" >&2
