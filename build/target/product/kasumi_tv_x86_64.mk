@@ -12,8 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include vendor/kasumi/build/target/product/lineage_generic_car_target.mk
+$(call inherit-product, device/google/atv/products/aosp_tv_x86_64.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_x86_64.mk)
+include $(CUSTOM_VENDOR_DIR)/build/target/product/kasumi_generic_tv_target.mk
 
-PRODUCT_NAME := lineage_car_x86_64
+PRODUCT_NAME := kasumi_tv_x86_64
+
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS :=
+
+PRODUCT_SDK_ADDON_NAME := kasumi
+PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP := $(LOCAL_PATH)/source.properties

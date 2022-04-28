@@ -12,10 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, build/target/product/aosp_arm_ab.mk)
-include vendor/kasumi/build/target/product/lineage_generic_target.mk
+$(call inherit-product, device/google/atv/products/aosp_tv_arm.mk)
+
+include $(CUSTOM_VENDOR_DIR)/build/target/product/kasumi_generic_tv_target.mk
 
 TARGET_NO_KERNEL_OVERRIDE := true
 TARGET_USES_64_BIT_BINDER := true
 
-PRODUCT_NAME := lineage_arm_ab
+PRODUCT_NAME := kasumi_tv_arm
+
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS :=
