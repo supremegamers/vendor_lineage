@@ -40,5 +40,5 @@ fi
 
 export CUSTOM_VENDOR_DIR="$(realpath --relative-to="$TOP" "$CUSTOM_VENDOR_DIR")"
 
-export ROM_VERSION="$( (xmlstarlet sel -t -v "/manifest/remote[@name='yuki-no-git']/@revision" "$TOP/.repo/manifests/default.xml" | sed -e 's/refs\/heads\///') || \
+export ROM_VERSION="$( (xmlstarlet sel -t -v "/manifest/remote[@name='kasumi']/@revision" "$TOP/.repo/manifests/default.xml" | sed -e 's/refs\/heads\///') || \
                         (repo branch | grep '^\*' | awk '{ print $2 }') )"
