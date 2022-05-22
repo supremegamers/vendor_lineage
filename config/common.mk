@@ -222,8 +222,14 @@ PRODUCT_KASUMI_EXTRAVERSION :=
 PRODUCT_KASUMI_VARIANT :=
 ifeq ($(KASUMI_BUILD_TYPE),gapps)
 ifeq ($(TARGET_GAPPS_ARCH),)
-$(warning TARGET_GAPPS_ARCH is not set, defaulting to arm64)
+$(warning TARGET_GAPPS_ARCH is not set, attempting to detect arm64 app support)
+ifeq ($(TARGET_SUPPORTS_64_BIT_APPS), true)
+$(warning arm64 support is present, setting TARGET_GAPPS_ARCH to arm64)
 TARGET_GAPPS_ARCH := arm64
+else
+$(warning arm64 app support is unavailable, setting TARGET_GAPPS_ARCH to arm)
+TARGET_GAPPS_ARCH := arm
+endif
 endif
 PRODUCT_KASUMI_VARIANT := -GApps
 $(call inherit-product, vendor/gapps/$(TARGET_GAPPS_ARCH)/$(TARGET_GAPPS_ARCH)-vendor.mk)
