@@ -241,7 +241,7 @@ endif
 
 # Different if-else statement to simplify setting OTA URL
 ifneq ($(filter gapps auroraoss,$(KASUMI_BUILD_TYPE)),)
-PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/android_vendor_kasumiota/kasumi-v1/$(KASUMI_BUILD_TYPE)/{device}.json
+PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/vendor_kasumiota/kasumi-v1/$(KASUMI_BUILD_TYPE)/{device}.json
 endif
 
 TARGET_BUILD_VARIANT_ID := $(PRODUCT_KASUMI_EXTRAVERSION)$(PRODUCT_KASUMI_VARIANT)
