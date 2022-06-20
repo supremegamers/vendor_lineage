@@ -12,14 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, build/target/product/aosp_x86.mk)
+$(call inherit-product, build/target/product/aosp_x86_64.mk)
 $(call inherit-product, build/target/product/gsi_release.mk)
 
 include $(CUSTOM_VENDOR_DIR)/build/target/product/kasumi_generic_target.mk
 
-TARGET_USES_64_BIT_BINDER := true
-
-PRODUCT_NAME := kasumi_x86
+PRODUCT_NAME := kasumi_x86_64-generic
 
 PRODUCT_SDK_ADDON_NAME := kasumi
 PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP := $(LOCAL_PATH)/source.properties
