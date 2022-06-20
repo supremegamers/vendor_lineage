@@ -25,11 +25,7 @@ lmodroid_generator {
 
     // Directories that can be imported by a cc_* module generated_headers property
     export_include_dirs: [
-        "usr/audio/include/uapi",
         "usr/include",
-        "usr/include/audio",
-        "usr/include/audio/include/uapi",
-        "usr/techpack/audio/include",
     ],
 
     // Sources for dependency tracking
@@ -38,7 +34,6 @@ lmodroid_generator {
         "Makefile",
         "include/**/*",
         "arch/$(KERNEL_ARCH)/include/**/*",
-        "techpack/audio/include/**/*",
     ],
 }
 
