@@ -23,7 +23,9 @@ SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 
 .PHONY: bandori
 ifeq ($(LINEAGE_BUILDTYPE),OFFICIAL)
-# This build is marked as official and requires signing.
+ifneq ($(TARGET_NO_ENFORCE_SIGNING),true)
+# This build is marked as official and requires signing. Some official devices might
+# not have a partition built so we're not enforcing signing for now.
 # TODO: Unify the process inside a separate makefile/shell script and call it instead.
 bandori: $(INTERNAL_OTA_PACKAGE_TARGET) otatools target-files-package
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(LINEAGE_TARGET_PACKAGE)
@@ -39,6 +41,20 @@ bandori: $(INTERNAL_OTA_PACKAGE_TARGET) otatools target-files-package
 	@echo "" >&2
 	@echo "To get started, get your custom recovery up and slap this ROM in!" >&2
 	@echo "Based on Project Materium, brought to you by Yuki (@AITEx64) and Beru Shinsetsu (@WindowZ414)." >&2
+else
+# Builds that can't be signed must have signature enforcement disabled using the flag above.
+bandori: $(INTERNAL_OTA_PACKAGE_TARGET)
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(LINEAGE_TARGET_PACKAGE)
+	$(hide) $(MD5) $(LINEAGE_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(LINEAGE_TARGET_PACKAGE).md5sum
+	$(hide) $(SHA256) $(LINEAGE_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(LINEAGE_TARGET_PACKAGE).sha256sum
+	@echo "//          Project Kasumi          //" >&2
+	@echo "// PoPiPa, PiPoPa, PoPiPaPaPiPoPa~! //" >&2
+	@echo "" >&2
+	@echo "Package Complete: $(LINEAGE_TARGET_PACKAGE)" >&2
+	@echo "" >&2
+	@echo "To get started, get your custom recovery up and slap this ROM in!" >&2
+	@echo "Based on Project Materium, brought to you by Yuki (@AITEx64) and Beru Shinsetsu (@WindowZ414)." >&2
+endif
 else
 # Builds that aren't marked as official aren't required to be signed.
 bandori: $(INTERNAL_OTA_PACKAGE_TARGET)
