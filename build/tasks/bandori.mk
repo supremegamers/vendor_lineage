@@ -19,6 +19,7 @@
 
 LINEAGE_TARGET_PACKAGE := $(PRODUCT_OUT)/Kasumi-$(LINEAGE_VERSION).zip
 
+SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/md5sum
 SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 
 .PHONY: bandori
