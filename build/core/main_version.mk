@@ -23,3 +23,7 @@ ADDITIONAL_BUILD_PROPERTIES += \
 # LineageOS Platform Internal Version
 ADDITIONAL_BUILD_PROPERTIES += \
     ro.lineage.build.version.plat.rev=$(LINEAGE_PLATFORM_REV)
+
+# Spoofed ASB
+CUSTOM_SECURITY_PATCH := 2022-08-05
+ADDITIONAL_BUILD_PROPERTIES += xyz.projectkasumi.spoofedasb=$(CUSTOM_SECURITY_PATCH)
