@@ -17,8 +17,6 @@
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/kasumi_arm.mk \
     $(LOCAL_DIR)/kasumi_arm64.mk \
-    $(LOCAL_DIR)/kasumi_x86-generic.mk \
-    $(LOCAL_DIR)/kasumi_x86_64-generic.mk \
     $(LOCAL_DIR)/kasumi_arm_ab.mk \
     $(LOCAL_DIR)/kasumi_arm64_ab.mk \
     $(LOCAL_DIR)/kasumi_x86_ab.mk \
@@ -33,8 +31,6 @@ PRODUCT_MAKEFILES := \
 COMMON_LUNCH_CHOICES := \
     kasumi_arm-userdebug \
     kasumi_arm64-userdebug \
-    kasumi_x86-generic-userdebug \
-    kasumi_x86_64-generic-userdebug \
     kasumi_arm_ab-userdebug \
     kasumi_arm64_ab-userdebug \
     kasumi_x86_ab-userdebug \
