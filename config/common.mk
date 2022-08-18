@@ -239,6 +239,19 @@ ifeq ($(KASUMI_BUILD_TYPE),auroraoss)
 PRODUCT_KASUMI_VARIANT := -AuroraOSS
 endif
 
+ifeq ($(KASUMI_BUILD_TYPE),foss)
+PRODUCT_KASUMI_VARIANT := -FOSS
+$(call inherit-product-if-exists, vendor/foss/foss.mk)
+endif
+
+ifeq ($(KASUMI_BUILD_TYPE),opengapps)
+PRODUCT_KASUMI_VARIANT := -OpenGapps
+GAPPS_VARIANT := pico
+GAPPS_EXCLUDED_PACKAGES := ActionsServices \
+                           SetupWizard
+$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+endif
+
 # Different if-else statement to simplify setting OTA URL
 ifneq ($(filter gapps auroraoss,$(KASUMI_BUILD_TYPE)),)
 PRODUCT_PROPERTY_OVERRIDES += lineage.updater.uri=https://raw.github.com/ProjectKasumi/vendor_kasumiota/kasumi-v1/$(KASUMI_BUILD_TYPE)/{device}.json
