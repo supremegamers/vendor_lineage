@@ -120,12 +120,22 @@ PRODUCT_PACKAGES += \
     VLC
 
 # F-Droid
-ifneq ($(WITH_GMS),true)
-PRODUCT_PACKAGES += \
-    F-Droid \
-    F-DroidPrivilegedExtension
-
+#ifneq ($(WITH_GMS),true)
+#PRODUCT_PACKAGES += \
+#    F-Droid \
+#    F-DroidPrivilegedExtension
+#
+#endif
 endif
+
+## GMS or FOSS
+# Gapps
+ifeq ($(LMODROID_VERSION), gapps)
+$(call inherit-product, vendor/gapps/x86_64/x86_64-vendor.mk)
+endif
+
+ifeq ($(LMODROID_VERSION), foss)
+$(call inherit-product, vendor/foss/foss.mk)
 endif
 
 # SetupWizard
