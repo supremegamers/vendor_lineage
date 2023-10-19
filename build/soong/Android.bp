@@ -47,6 +47,43 @@ cc_library_headers {
 
 // Target platform agnostic config modules
 soong_config_module_type {
+    name: "aapt_version_code",
+    module_type: "java_defaults",
+    config_namespace: "lmodroidGlobalVars",
+    value_variables: ["aapt_version_code"],
+    properties: ["aaptflags"],
+}
+
+aapt_version_code {
+    name: "aapt_version_code_defaults",
+    soong_config_variables: {
+        aapt_version_code: {
+            aaptflags: [
+                "--version-code",
+                "%s",
+            ],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "camera_override_format_from_reserved",
+    module_type: "cc_defaults",
+    config_namespace: "lmodroidGlobalVars",
+    bool_variables: ["camera_override_format_from_reserved"],
+    properties: ["cppflags"],
+}
+
+camera_override_format_from_reserved {
+    name: "camera_override_format_from_reserved_defaults",
+    soong_config_variables: {
+        camera_override_format_from_reserved: {
+            cppflags: ["-DTARGET_CAMERA_OVERRIDE_FORMAT_FROM_RESERVED"],
+        },
+    },
+}
+
+soong_config_module_type {
     name: "gralloc_10_usage_bits",
     module_type: "cc_defaults",
     config_namespace: "lmodroidGlobalVars",
@@ -59,6 +96,23 @@ gralloc_10_usage_bits {
     soong_config_variables: {
         additional_gralloc_10_usage_bits: {
             cppflags: ["-DADDNL_GRALLOC_10_USAGE_BITS=%s"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "gralloc_handle_custom_content_md_reserved_size",
+    module_type: "cc_defaults",
+    config_namespace: "lmodroidGlobalVars",
+    bool_variables: ["gralloc_handle_has_custom_content_md_reserved_size"],
+    properties: ["export_cflags"],
+}
+
+gralloc_handle_custom_content_md_reserved_size {
+    name: "gralloc_handle_has_custom_content_md_reserved_size_defaults",
+    soong_config_variables: {
+        gralloc_handle_has_custom_content_md_reserved_size: {
+            export_cflags: ["-DGRALLOC_HANDLE_HAS_CUSTOM_CONTENT_MD_RESERVED_SIZE"],
         },
     },
 }
@@ -196,6 +250,51 @@ egl_display_array {
     soong_config_variables: {
         uses_egl_display_array: {
             cflags: ["-DEGL_DISPLAY_ARRAY"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "health_charging_control",
+    module_type: "cc_defaults",
+    config_namespace: "lmodroidGlobalVars",
+    bool_variables: [
+        "target_health_charging_control_supports_toggle",
+        "target_health_charging_control_supports_bypass",
+        "target_health_charging_control_supports_deadline",
+    ],
+    value_variables: [
+        "target_health_charging_control_charging_path",
+        "target_health_charging_control_charging_enabled",
+        "target_health_charging_control_charging_disabled",
+        "target_health_charging_control_deadline_path",
+    ],
+    properties: ["cppflags"],
+}
+
+health_charging_control {
+    name: "health_charging_control_defaults",
+    soong_config_variables: {
+        target_health_charging_control_supports_toggle: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_SUPPORTS_TOGGLE"],
+        },
+        target_health_charging_control_supports_bypass: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS"],
+        },
+        target_health_charging_control_supports_deadline: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_SUPPORTS_DEADLINE"],
+        },
+        target_health_charging_control_charging_path: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_CHARGING_PATH=\"%s\""],
+        },
+        target_health_charging_control_charging_enabled: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_CHARGING_ENABLED=\"%s\""],
+        },
+        target_health_charging_control_charging_disabled: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_CHARGING_DISABLED=\"%s\""],
+        },
+        target_health_charging_control_deadline_path: {
+            cppflags: ["-DHEALTH_CHARGING_CONTROL_DEADLINE_PATH=\"%s\""],
         },
     },
 }

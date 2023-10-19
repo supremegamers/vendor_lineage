@@ -3,6 +3,8 @@
 
 PRODUCT_BRAND ?= LMODroid
 
+include $(CUSTOMER_VENDOR_DIR)/build/config.mk
+
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
@@ -108,6 +110,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Backgrounds
 
+# Build Manifest
+PRODUCT_PACKAGES += \
+    build-manifest
+
 # Updater
 PRODUCT_PACKAGES += \
     Updater
@@ -125,7 +131,6 @@ ifneq ($(TARGET_WITHOUT_PREBUILT_APPS),true)
 PRODUCT_PACKAGES += \
     Jellyfish \
     MusicPlayerGO
-#    VLC
 endif
 
 # F-Droid
@@ -143,7 +148,6 @@ PRODUCT_PACKAGES += \
 
 # System apps
 PRODUCT_PACKAGES += \
-    Aperture \
     Etar \
     ExactCalculator \
     GameSpace \
@@ -152,31 +156,17 @@ PRODUCT_PACKAGES += \
     Recorder \
     Seedvault
 
+ifneq ($(PRODUCT_NO_CAMERA),true)
+PRODUCT_PACKAGES += \
+    Aperture
+endif
+
 # TouchGestures
 PRODUCT_PACKAGES += \
     TouchGestures
 
 # TTS
 $(call inherit-product, external/svox/svox_tts.mk)
-
-# FaceUnlock
-ifneq ($(TARGET_FACE_UNLOCK_OPTOUT), true)
-PRODUCT_PACKAGES += \
-    LMOFaceUnlock
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
-
-PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-    system/app/LMOFaceUnlock/LMOFaceUnlock.apk \
-    system/app/LMOFaceUnlock/lib/%/libtensorflowlite_jni.so \
-    system/etc/face/detect-class1.tflite \
-    system/etc/face/detect-class1.txt \
-    system/etc/face/mobile_face_net.tflite \
-    system/etc/face/mobile_face_net.txt \
-    system/etc/permissions/android.hardware.biometrics.face.xml \
-    system/lib%/libtensorflowlite_jni.so
-endif
 
 # Config
 PRODUCT_PACKAGES += \
@@ -293,6 +283,11 @@ PRODUCT_PACKAGES += \
     NetworkStackOverlay
 
 # Translations
+CUSTOM_LOCALES += \
+    ast_ES \
+    gd_GB \
+    cy_GB
+
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/crowdin/overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
 
@@ -304,5 +299,3 @@ SOONG_BANNER_FAKE_NAME_LMODROID_BUILD_NAME := $(CUSTOMER_VERSION_VAR_NAME)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/lmodroid/config/partner_gms.mk
-
-include $(CUSTOMER_VENDOR_DIR)/build/config.mk
