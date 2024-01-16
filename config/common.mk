@@ -81,7 +81,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Support many users/work profiles
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    persist.sys.max_profiles=16 \
+    persist.sys.max_profiles?=16 \
     fw.max_users=32
 
 # Do not include art debug targets
@@ -290,6 +290,10 @@ CUSTOM_LOCALES += \
 
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/crowdin/overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/crowdin/overlay
+
+# Udfps Animations
+PRODUCT_PACKAGES += \
+    UdfpsAnimations
 
 -include vendor/lmodroid-priv/keys/keys.mk
 
